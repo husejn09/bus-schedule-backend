@@ -1,136 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gips Web App</title>
-    <link rel="stylesheet" href="styles.css">
-    
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="navbar-brand">
-            <img src="Screenshot_1.png" alt="Logo" class="logo">
-        </div>
-        <ul class="navbar-list list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Spisak linija</a></li>
-            <li><a href="#">Spisak stanica</a></li>
-            <li class="close-btn" style="text-align: center; font-size: 30px;">&times;</li>
-        </ul>
-        <div class="navbar-toggle" id="navbar-toggle">
-            &#9776;
-        </div>
+      <div class="navbar-brand">
+        <img src="Screenshot_1.png" alt="Logo" class="logo" />
+      </div>
+      <ul class="navbar-list list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Spisak linija</a></li>
+        <li><a href="#">Spisak stanica</a></li>
+        <li class="close-btn" style="text-align: center; font-size: 30px">
+          &times;
+        </li>
+      </ul>
+      <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
     </nav>
 
     <div class="welcome">
-            <h1>DOBRODOŠLI</h1>
-            <h2>Provjerite vrijeme dolaska slijedećeg busa</h2>
+      <h1>DOBRODOŠLI</h1>
+      <h2>Provjerite vrijeme dolaska slijedećeg busa</h2>
     </div>
 
-
-<!-- Glasovni comm na telefonu-->
     <div class="container">
-        <div class="search">
-            <p id="trazi">Trazi putem</p>
-            <ul class="search_list">
-                <li class="search_id"> <button class="buttons" id="linija_button" >Stanica</button></li>
-                <li class="search_id"> <button class="buttons" onclick="linijaButton(), hrShow()" id="stanica_button">Linija</button></li>
-            </ul>
-        </div>
-        <div class="first_search">
-            <input type="text" placeholder="Ime stanice" id="search_bar"> 
-            <button type="submit">Traži</button>
-        </div>
+      <div class="search">
+        <p id="trazi">Trazi putem</p>
+        <ul class="search_list">
+          <li class="search_id">
+            <button class="buttons" id="linija_button">Stanica</button>
+          </li>
+          <li class="search_id">
+            <button
+              class="buttons"
+              onclick="linijaButton(), hrShow()"
+              id="stanica_button"
+            >
+              Linija
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="first_search">
+        <input type="text" placeholder="Ime stanice" id="search_bar" />
+        <button type="submit">Traži</button>
+      </div>
     </div>
-    <hr>
+    <hr />
 
     <div class="card" id="card_id">
-        <div class="card_info" >
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 1</button></div>
-            <div><button class="linija" id="1" onclick="hrShow2(), scrollToDiv2()">Linija 2</button></div>
-            <div><button class="linija" id="3" onclick="hrShow2(), scrollToDiv2()">Linija 3</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 4</button></div>
-            <div><button class="linija" id="5" onclick="hrShow2(), scrollToDiv2()">Linija 5</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 6</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 7</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 8</button></div>
-            <div><button class="linija" id="7" onclick="hrShow2(), scrollToDiv2()">Linija 9</button></div>
-            <div><button class="linija" id="9" onclick="hrShow2(), scrollToDiv2()">Linija 10</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 11</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 13</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 14</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 15</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 16</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 18</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 19</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;"id="scroll_id" onclick="hrShow2()">Linija 20</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 21</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 22</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 24</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 28</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 29</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 30</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 31</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 38</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 41</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 42</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 45</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 50</button></div>
-            <div><button class="linija" style="background-color: grey; cursor:default;">Linija 51</button></div>
+      <div class="card_info">
+        <div><button class="linija" id="n1">Linija 1</button></div>
+        <div>
+          <button class="linija" id="1" onclick="hrShow2(), scrollToDiv2()">
+            Linija 2
+          </button>
         </div>
+        <div>
+          <button class="linija" id="3" onclick="hrShow2(), scrollToDiv2()">
+            Linija 3
+          </button>
+        </div>
+        <div><button class="linija" id="n2">Linija 4</button></div>
+        <div>
+          <button class="linija" id="5" onclick="hrShow2(), scrollToDiv2()">
+            Linija 5
+          </button>
+        </div>
+        <div><button class="linija" id="n3">Linija 6</button></div>
+        <div><button class="linija" id="n4">Linija 7</button></div>
+        <div><button class="linija" id="n5">Linija 8</button></div>
+        <div>
+          <button class="linija" id="7" onclick="hrShow2(), scrollToDiv2()">
+            Linija 9
+          </button>
+        </div>
+        <div>
+          <button class="linija" id="9" onclick="hrShow2(), scrollToDiv2()">
+            Linija 10
+          </button>
+        </div>
+        <div><button class="linija" id="n6">Linija 11</button></div>
+        <div><button class="linija" id="n7">Linija 13</button></div>
+        <div><button class="linija" id="n8">Linija 14</button></div>
+        <div><button class="linija" id="n9">Linija 15</button></div>
+        <div><button class="linija" id="n10">Linija 16</button></div>
+        <div><button class="linija" id="n11">Linija 18</button></div>
+        <div><button class="linija" id="n12">Linija 19</button></div>
+        <div>
+          <button class="linija" id="scroll_id" onclick="hrShow2()">
+            Linija 20
+          </button>
+        </div>
+        <div><button class="linija" id="n13">Linija 21</button></div>
+        <div><button class="linija" id="n14">Linija 22</button></div>
+        <div><button class="linija" id="n15">Linija 24</button></div>
+        <div><button class="linija" id="n16">Linija 28</button></div>
+        <div><button class="linija" id="n17">Linija 29</button></div>
+        <div><button class="linija" id="n18">Linija 30</button></div>
+        <div><button class="linija" id="n19">Linija 31</button></div>
+        <div><button class="linija" id="n20">Linija 38</button></div>
+        <div><button class="linija" id="n21">Linija 41</button></div>
+        <div><button class="linija" id="n22">Linija 42</button></div>
+        <div><button class="linija" id="n23">Linija 45</button></div>
+        <div><button class="linija" id="n24">Linija 50</button></div>
+        <div><button class="linija" id="n25">Linija 51</button></div>
+      </div>
     </div>
-    <hr id="bottom_hr">
+    <hr id="bottom_hr" />
 
-    <div class="linija_content" id="linija_C" style="display: none;">
-    <div class="span_and_hr">
+    <div class="linija_content" id="linija_C" style="display: none">
+      <div class="span_and_hr">
         <span class="dot"></span>
-        <hr style="max-width: 90%;" id="line_hr">
+        <hr style="max-width: 90%" id="line_hr" />
         <span class="dot"></span>
-    </div>
+      </div>
 
-    <div class="stations_div" id="station_id">
+      <div class="stations_div" id="station_id">
         <p id="start_stanica"></p>
         <p id="end_stanica"></p>
-    </div>
+      </div>
 
-
-    <div class="linija_busInfo">
+      <div class="linija_busInfo">
         <!-- Dropdown meni za odabir dana u sedmici -->
-        <div class="choose_div"> 
-            <select id="daySelect" >
-                <option value="1">Radni dani</option>
-                <option value="6">Subota</option>
-                <option value="7">Nedjelja</option>
-            </select>
+        <div class="choose_div">
+          <select id="daySelect">
+            <option value="1">Radni dani</option>
+            <option value="6">Subota</option>
+            <option value="7">Nedjelja</option>
+          </select>
 
-            <select id="directionSelect">
-                <option value="1">Outbound</option>
-                <option value="2">Inbound</option>
-            </select>
-    
-            <select id="timeSelect">
-                <!-- Options will be populated dynamically -->
-            </select>
+          <select id="directionSelect">
+            <option value="1">Outbound</option>
+            <option value="2">Inbound</option>
+          </select>
 
-
+          <select id="timeSelect">
+            <!-- Options will be populated dynamically -->
+          </select>
         </div>
         <div class="main_bus" id="main_id">
-        <div class="bus" id="add_css">
-                <div class="img_div" id="img_id"><img class="bus_icon" alt="bus_icon" src="transport_15845536.png"></div>
-                <div class="time_div" id="time_id"><p id="start_time">start time</p></div>
-                <div class="arrow_div" id="arrow_id">&rarr;</div>
-                <div class="arrv_station" id="arrv_station_id"><p id="station_name">station name</p></div>
+          <div class="bus" id="add_css">
+            <div class="img_div" id="img_id">
+              <img
+                class="bus_icon"
+                alt="bus_icon"
+                src="transport_15845536.png"
+              />
+            </div>
+            <div class="time_div" id="time_id">
+              <p id="start_time">start time</p>
+            </div>
+            <div class="arrow_div" id="arrow_id">&rarr;</div>
+            <div class="arrv_station" id="arrv_station_id">
+              <p id="station_name">station name</p>
+            </div>
+          </div>
+          <div id="stationsContainer"></div>
         </div>
-        <div id="stationsContainer"></div>
+      </div>
     </div>
-        <div id="map" style="height: 300px; width: 60%;" class="gMap"></div>
-    </div>
-</div>
-
-    
-
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

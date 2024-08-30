@@ -42,9 +42,10 @@ app.use('/api', routeRoutes);
 
 
 //Ruta za prikaz koordinata stanica
-app.get('/stations/coordinates', (req, res) => {
-  const query = 'SELECT station_id, latitude, longitude FROM stations';
-  db.query(query, (err, results) => {
+app.get('/stations/coordinates/:routeId', (req, res) => {
+  const routeId = req.params.routeId;
+  const query = 'SELECT s.station_id, s.latitude, s.longitude FROM stations s JOIN route_stations rs ON s.station_id = rs.station_id WHERE rs.route_id = 1';
+  db.query(query, [routeId], (err, results) => {
     if(err){
       console.error('Greška pri dohvaćanju podataka: ', err);
       res.status(500).send('Greška pri dohvaćanju podataka');
@@ -122,64 +123,6 @@ app.get('/schedule-with-stations/:routeId/:dayOfWeek', (req, res) => {
       res.json(results);
   });
 });
- 
-/*
-// Ruta za dohvatanje vremena i udaljenosti do sledeće stanice
-app.get('/route-stations/next/:routeId/:dayOfWeek/:departureTime', async (req, res) => {
-  const routeId = req.params.routeId;
-  const dayOfWeek = req.params.dayOfWeek;
-
-  const query = `
-      SELECT 
-          rs.station_id, 
-          st.station_name, 
-          st.latitude, 
-          st.longitude 
-      FROM 
-          route_stations rs
-      INNER JOIN 
-          stations st ON rs.station_id = st.station_id
-      WHERE 
-          rs.route_id = ?
-  `;
-
-  db.query(query, [routeId, dayOfWeek], async (err, results) => {
-      if (err) {
-          console.error('Greška pri dohvaćanju podataka:', err);
-          res.status(500).send('Greška pri dohvaćanju podataka');
-          return;
-      }
-
-      try {
-          const stations = results;
-          const travelTimes = [];
-
-
-          for (let i = 1; i < stations.length; i++) {
-            const origin = `${stations[i-1].latitude},${stations[i-1].longitude}`;
-            const destination = `${stations[i].latitude},${stations[i].longitude}`;
-
-              const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${apiKey}`;
-
-              const response = await axios.get(url);
-              
-              const travelTime = response.data.routes[0].legs[0].duration.value;
-
-              travelTimes.push({
-                
-                  travelTime
-              });
-          }
-
-          res.json(travelTimes);
-      } catch (error) {
-          console.error('Greška pri dohvatanju podataka sa Google Maps API:', error);
-          res.status(500).send('Greška pri dohvatanju podataka sa Google Maps API');
-      }
-  });
-}); 
-
-*/
 
 
 app.get('/route-stations/next/:routeId', async (req, res) => {

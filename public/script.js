@@ -24,12 +24,12 @@ function hrShow() {
 function hrShow2() {
     let n = document.getElementById("linija_C");
   
-    if (n.style.display === "none") {
+    if (n.style.display === "block") {
       n.style.display = "block";
-    } else if(document.getElementById("linija_C"). style.display === 'block'){
+    } else if(document.getElementById("linija_C"). style.display === 'none'){
       n.style.display = "block";
     }
-    else n.style.display === "none"
+    else n.style.display === "block"
   }
 
 function scrollToDiv() {
@@ -62,19 +62,6 @@ function linijaButton() {
   }, 150);
 }
 
-let map;
-let directionsService;
-let directionsRenderer;
-
-function initMap() {
-  directionsService = new google.maps.DirectionsService();
-  directionsRenderer = new google.maps.DirectionsRenderer();
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: { lat: 45.815, lng: 15.9819 }, // Default to a central location
-  });
-  directionsRenderer.setMap(map);
-}
 
 // Uzimanje podataka start end stanice
 async function startEndStation(route_id) {
@@ -229,7 +216,7 @@ document.getElementById("directionSelect").addEventListener("change", async func
     await prikazStartEnd(route_id);
     await prikazDepartureTime(route_id, day_of_week);
     await prikazData(route_id);
-
+    
 });
 
 // Event listener za odabir dana (Radni dan, Subota, Nedelja)
@@ -318,17 +305,17 @@ async function prikazData(route_id) {
         let currentTime = new Date();
         const initialTimeParts = initialTime.split(':').map(Number);
         currentTime.setHours(initialTimeParts[0], initialTimeParts[1], initialTimeParts[2]);
-
+    
         const stationsContainer = document.getElementById("stationsContainer");
         stationsContainer.innerHTML = "";
-        data.forEach((station, index) => {
+        data.forEach((station, index ) => {
             const stationDiv = document.createElement("div");
             stationDiv.className = "bus";
             stationDiv.id = `adding_div_${index + 1}`;
 
+            currentTime = adjustTime(currentTime, station.travelTime);
+
             const startTime = formatTime(currentTime);
-
-
             stationDiv.innerHTML = `
                 <div class="img_div" id="img_id${index + 2}"><img class="bus_icon" alt="bus_icon" src="transport_15845536.png"></div>
                 <div class="time_div" id="time_id${index + 2}"><p id="start_time${index + 2}">${startTime}</p></div>
@@ -338,13 +325,9 @@ async function prikazData(route_id) {
 
     stationsContainer.appendChild(stationDiv);
 
-    currentTime = adjustTime(currentTime, station.travelTime);
 });
         
     } catch (error) {
         console.error("Error fetching departure times:", error);
     }
 } 
-
-
-
