@@ -1,3 +1,8 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
 /* Navbar */
 .navbar {
   display: flex;
@@ -8,16 +13,10 @@
 
 /* Logo styling */
 .navbar-brand .logo {
-  width: 150px;
+  width: 155px;
   height: 110px;
 }
 
-@media (max-width: 768px) {
-  .navbar-brand .logo {
-    width: 100px;
-    height: 70px;
-  }
-}
 
 .list {
   list-style-type: none;
@@ -32,7 +31,7 @@
   padding: 10px;
   font: 1.4em sans-serif;
   font-weight: bold;
-  color: #2771b8;
+  color: #33334f;
 }
 
 .navbar-toggle {
@@ -45,11 +44,11 @@
 
 a {
   text-decoration: none;
-  color: #2771b8;
+  color: #33334f;
 }
 
 /* Responsive styling */
-@media (max-width: 768px) {
+@media (max-width: 1125px) {
   .navbar-list {
     display: none;
     position: fixed;
@@ -82,10 +81,24 @@ a {
     padding: 10px;
     color: #3f4756;
   }
+
+  .navbar-brand .logo {
+    width: 100px;
+    height: 70px;
+  }
+
+  #h1-id {
+    font-size: 3.5em;
+  }
+  
+  #h2-id {
+    font-size: 1.4em;
+  }
+
 }
 
 /* Hide close button on desktop view */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .navbar-list .close-btn {
     display: none;
   }
@@ -95,14 +108,99 @@ a {
   }
 }
 
+@media (min-width: 1125px) {
+  
+  #landing-div-id{
+    width: 40%;
+    max-width: 40%;
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  #h1-id {
+    font-size: 2.8em;
+  }
+  
+  #h2-id {
+    font-size: 1em;
+  }
+}
+
+
+
 /* Show menu when toggle is active */
 .navbar-list.active {
   display: flex;
 }
 
+
+/* /////////       Landing page edit          ///////// */
+
+.landing-div{
+  background-color: hsl(203, 74%, 53%, 81%);
+  height: 25em;
+  border-radius: 100px;
+  width: 80%;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+.main-search{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20%;
+}
+
+
+.linija-search {
+  background-color: #fff;
+  border-radius: 30px;
+  height: 5em;
+  width: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin-top: 40px;
+}
+
+.stanica-search {
+  background-color: #fff;
+  border-radius: 30px;
+  height: 5em;
+  width: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin-top: 40px;
+}
+
+.busIcon-black{
+  width: 30px;
+  height: 30px;
+  margin-top: auto;
+}
+
+.bus-stopcom {
+  width: 30px;
+  height: 30px;
+  margin-top: auto;
+}
+
+.text-search{
+  margin-top: 5px;
+}
+
+
 /* Welcome div - tekst */
 .welcome {
-  margin-top: 2%;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -110,44 +208,15 @@ a {
 }
 
 h1 {
-  font-size: 70px;
+  font-size: 4em;
   margin-bottom: auto;
+  color: #33334f;
 }
 
 h2 {
-  font-size: 27px;
+  font-size: 1.5em;
   margin-top: 0;
-}
-
-
-/* Second div - search and finder*/
-#trazi {
-  font-size: 150%;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-}
-
-.search {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.search_list {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-}
-
-.search_id {
-  padding: 2%;
-  text-align: center;
-}
-
-#linija_button:hover, #stanica_button:hover {
-  background-color: grey;
+  color: #33334f;
 }
 
 .buttons {
@@ -161,13 +230,6 @@ h2 {
   border: none;
 }
 
-.first_search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-}
 
 @media screen and (max-width: 768px) {
   h1 {
@@ -177,27 +239,9 @@ h2 {
     font-size: 3vw;
   }
 
-  #trazi {
-    font-size: 110%;
-  }
-  .search_list {
-    margin-left: 20px;
-  }
-
   hr {
     width: 60%;
   }
-}
-
-.container {
-  border-radius: 10px;
-  max-width: 60%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
 }
 
 hr {
@@ -207,24 +251,7 @@ hr {
   margin-top: 20px;
 }
 
-/* zasto ce mi dodatni edit za button preko tag-a*/
-button {
-  padding: 15px;
-  font-size: medium;
-  width: 100px;
-  cursor: pointer;
-  background-color: #2771b8;
-  color: white;
-  border-radius: 10px;
-  border: none;
-}
 
-#search_bar {
-  margin-right: 5px;
-  border-radius: 5px;
-  height: 40px;
-  flex: 1;
-}
 
 .main {
   border: solid hsl(0, 0%, 0%) 2px;

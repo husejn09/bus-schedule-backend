@@ -132,7 +132,7 @@ async function handleRouteClick(routeId) {
         await prikazStartEnd(route_id);
         await prikazDepartureTime(route_id, day_of_week);
         await getVrijeme();
-        await prikazData(route_id);
+
     } else {
         console.log("Greška prilikom fetch-a");
     }
@@ -215,7 +215,7 @@ document.getElementById("directionSelect").addEventListener("change", async func
     }
     await prikazStartEnd(route_id);
     await prikazDepartureTime(route_id, day_of_week);
-    await prikazData(route_id);
+    
     
 });
 
@@ -236,7 +236,7 @@ document.getElementById("daySelect").addEventListener("change", async function()
     
     await prikazStartEnd(route_id);
     await prikazDepartureTime(route_id, day_of_week);
-    await prikazData(route_id);
+    
 });
 
 // Event listener za promenu vremena polaska
@@ -246,7 +246,7 @@ document.getElementById("timeSelect").addEventListener("change", async function(
     let n = document.getElementById('start_time');
     let x = document.getElementById("timeSelect").value;
     n.innerHTML = x;
-    await prikazData(route_id);
+    
 });
 
 

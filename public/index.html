@@ -9,12 +9,15 @@
   <body>
     <nav class="navbar">
       <div class="navbar-brand">
-        <img src="Screenshot_1.png" alt="Logo" class="logo" />
+        <img src="assets\logoG.png" alt="Logo" class="logo" />
       </div>
       <ul class="navbar-list list">
         <li><a href="#">Home</a></li>
         <li><a href="#">Spisak linija</a></li>
         <li><a href="#">Spisak stanica</a></li>
+        <li><a href="#">O projektu</a></li>
+        <li><a href="#">Login/Register</a></li>
+        <li><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
         <li class="close-btn" style="text-align: center; font-size: 30px">
           &times;
         </li>
@@ -22,35 +25,24 @@
       <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
     </nav>
 
-    <div class="welcome">
-      <h1>DOBRODOŠLI</h1>
-      <h2>Provjerite vrijeme dolaska slijedećeg busa</h2>
-    </div>
+    <div class="landing-div" id="landing-div-id"> 
+      <div class="welcome">
+        <h1 id="h1-id">Gips Bus Check</h1>
+        <h2 id="h2-id">Provjerite vrijeme dolaska slijedećeg busa</h2>
+      </div>
 
-    <div class="container">
-      <div class="search">
-        <p id="trazi">Trazi putem</p>
-        <ul class="search_list">
-          <li class="search_id">
-            <button class="buttons" id="linija_button">Stanica</button>
-          </li>
-          <li class="search_id">
-            <button
-              class="buttons"
-              onclick="linijaButton(), hrShow()"
-              id="stanica_button"
-            >
-              Linija
-            </button>
-          </li>
-        </ul>
+      <div class="main-search"> 
+        <div class="linija-search">
+            <img src="assets/bus-icon-black.png" alt="bus-icon" class="busIcon-black">
+            <p class="text-search">Linija</p>
+        </div>
+
+        <div class="stanica-search">
+            <img src="assets/bus-stop.png" alt="station-icon" class="bus-stopcom">
+            <p class="text-search">Stanica</p>
+        </div>
       </div>
-      <div class="first_search">
-        <input type="text" placeholder="Ime stanice" id="search_bar" />
-        <button type="submit">Traži</button>
-      </div>
-    </div>
-    <hr />
+  </div>
 
     <div class="card" id="card_id">
       <div class="card_info">
@@ -149,7 +141,7 @@
               <img
                 class="bus_icon"
                 alt="bus_icon"
-                src="transport_15845536.png"
+                src="assets/busIcon-black.png"
               />
             </div>
             <div class="time_div" id="time_id">
