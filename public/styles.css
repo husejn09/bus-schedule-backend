@@ -108,13 +108,15 @@ a {
   }
 }
 
-@media (min-width: 1125px) {
+@media (min-width: 1300px) {
   
   #landing-div-id{
     width: 40%;
     max-width: 40%;
     padding-top: 10px;
     padding-bottom: 50px;
+    margin-top: 3%;
+    border-radius: 120px;
   }
 }
 
@@ -128,7 +130,11 @@ a {
   }
 }
 
-
+@media (max-width: 768px) {
+  #route-buttons-id{
+    font-size: 80%;
+  }
+}
 
 /* Show menu when toggle is active */
 .navbar-list.active {
@@ -138,67 +144,6 @@ a {
 
 /* /////////       Landing page edit          ///////// */
 
-.landing-div{
-  background-color: hsl(203, 74%, 53%, 81%);
-  height: 25em;
-  border-radius: 100px;
-  width: 80%;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5%;
-}
-
-.main-search{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20%;
-}
-
-
-.linija-search {
-  background-color: #fff;
-  border-radius: 30px;
-  height: 5em;
-  width: 5em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5px;
-  margin-top: 40px;
-}
-
-.stanica-search {
-  background-color: #fff;
-  border-radius: 30px;
-  height: 5em;
-  width: 5em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5px;
-  margin-top: 40px;
-}
-
-.busIcon-black{
-  width: 30px;
-  height: 30px;
-  margin-top: auto;
-}
-
-.bus-stopcom {
-  width: 30px;
-  height: 30px;
-  margin-top: auto;
-}
-
-.text-search{
-  margin-top: 5px;
-}
-
-
-/* Welcome div - tekst */
 .welcome {
   padding-top: 40px;
   display: flex;
@@ -216,20 +161,8 @@ h1 {
 h2 {
   font-size: 1.5em;
   margin-top: 0;
-  color: #33334f;
+  color: hsl(240, 22%, 25%, 0.8);
 }
-
-.buttons {
-  padding: 15px;
-  font-size: medium;
-  width: 100%;
-  cursor: pointer;
-  background-color: #2771b8;
-  color: white;
-  border-radius: 10px;
-  border: none;
-}
-
 
 @media screen and (max-width: 768px) {
   h1 {
@@ -238,66 +171,229 @@ h2 {
   h2 {
     font-size: 3vw;
   }
-
-  hr {
-    width: 60%;
-  }
-}
-
-hr {
-  height: 3px;
-  background-color: #2771b8;
-  border: none;
-  margin-top: 20px;
+ 
 }
 
 
-
-.main {
-  border: solid hsl(0, 0%, 0%) 2px;
+.landing-div{
+  background-color: hsl(203, 74%, 53%, 81%);
+  height: max-content;
+  border-radius: 70px;
+  width: 90%;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 5%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90%;
+  padding-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-
-/* /////// Card info //////// */
-.card {
-  justify-content: center;
-  max-width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  display: none;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-.card.show {
-    max-height: 1000px; 
-  }
-
-.card_info {
+.main-search{
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20%;
+}
+
+
+.linija-search {
+  background-color: #fff;
+  border-radius: 25px;
+  height: 4em;
+  width: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin-top: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #33334f;
+}
+
+.linija-search:hover, .stanica-search:hover{
+  transition: background-color 0.3s;
+  background-color: hsl(240, 22%, 25%, 84%);
+  color: white;
+}
+
+.linija-search.clicked{
+  transition: background-color 0.3s;
+  background-color: hsl(240, 22%, 25%, 84%);
+  color: white;
+}
+
+
+.stanica-search {
+  background-color: #fff;
+  border-radius: 25px;
+  height: 4em;
+  width: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin-top: 40px;
+  cursor: pointer;
+  color: #33334f;
+  font-weight: bold;
+}
+
+.busIcon-black{
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+}
+
+.bus-stopcom {
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+}
+
+.text-search{
+  margin-top: 5px;
+}
+
+
+.routes{
+  display: none;
+}
+
+.routes-visible{
+  transition: opacity 0.5s ease;
+}
+
+.route-buttons{
+  display: flex; 
+  flex-direction: row;
+  text-align: center;
   flex-wrap: wrap;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  row-gap: 10px;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.r-buttons{
+  background-color: hsl(240, 22%, 25%, 84%);
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  margin-left: 0;
+  margin-right: 0;
+  width: 49%;
+  font-size: 95%;
+  border: none;
+  font-weight:bold;
 }
 
 #bottom_hr {
-  margin-top: 10px;
+  margin-top: 50px;
+  border: none; 
+  border-top: 2px dashed #33334f; 
+  width: 80%; 
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-  .linija {
-    font-size: small;
-    width: 80px;
-    cursor: pointer;
-  }
+.choose_div{
+  margin-top: 9%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 65%;
+  width: 65%;
+  justify-content: center;
+  gap: 50px;
 }
- 
+
+select {
+  background-color: hsl(240, 22%, 25%, 84%);
+  color: white;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+}
+
+select:hover{
+  cursor: pointer;
+  background-color:#3f4756;
+}
+
+.main-card{
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  color: #33334f;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.card-info{
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 10px 15px 10px 25px;
+  border-radius: 25px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content:center ;
+  width: fit-content;
+}
+
+.dots{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-hr{
+  height: 35px;
+  margin-top: -15px;
+  margin-bottom: -15px;
+  width: 1px;
+  border: none;
+  background-color: hsl(240, 22%, 25%, 84%);
+}
+
+.r-buttons-card{
+  background-color: #33334f;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 60px;
+  padding: 10px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+.dot {
+  height: 17px;
+  width: 17px;
+  background-color: #33334f;
+  border-radius: 50%;
+
+}
+
+.time-info{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.stanica-info{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+
+}
 
 /* After linija click */
 
@@ -332,14 +428,6 @@ hr {
   margin-right: 5px;
 }
 
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  margin-top: 10px;
-}
 
 
 @media screen and (max-width: 769px){
@@ -475,10 +563,6 @@ hr {
     font-size:xx-small;
   }
 
-  #daySelect, #directionSelect, #timeSelect {
-    padding: 3px;
-  }
-
   #main_id {
     max-width: 95%;
   }
@@ -513,29 +597,6 @@ hr {
   padding-top: 2px;
 }
 
-
-.choose_div{
-  margin-top: 10%;
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 60%;
-  width: 60%;
-  justify-content: center;
-  gap: 3px;
-}
-
-select {
-  background-color: #2771b8;
-  color: white;
-  padding: 7px;
-  border-radius: 10px;
-}
-
-select:hover{
-  cursor: pointer;
-  background-color:#3f4756;
-}
 
 /*
 .gMap{

@@ -25,6 +25,7 @@
       <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
     </nav>
 
+
     <div class="landing-div" id="landing-div-id"> 
       <div class="welcome">
         <h1 id="h1-id">Gips Bus Check</h1>
@@ -32,79 +33,71 @@
       </div>
 
       <div class="main-search"> 
-        <div class="linija-search">
-            <img src="assets/bus-icon-black.png" alt="bus-icon" class="busIcon-black">
+        <div class="linija-search" id="linija-search-id" onclick="hrShow()">
+            <img src="assets/bus-icon-b.png" alt="bus-icon" class="busIcon-black">
             <p class="text-search">Linija</p>
         </div>
 
-        <div class="stanica-search">
-            <img src="assets/bus-stop.png" alt="station-icon" class="bus-stopcom">
+        <div class="stanica-search" id="stanica-search-id">
+            <img src="assets/bus-icon-blue.png" alt="station-icon" class="bus-stopcom">
             <p class="text-search">Stanica</p>
         </div>
       </div>
+
+
+      <div class="routes" id="routes-main">
+        <div class="route-buttons" id="route-buttons-id">
+          <button class="r-buttons">2 (Solina - Siporeks)</button>
+          <button class="r-buttons">3 (Moluhe - Gradina)</button>
+          <button class="r-buttons">5 (Slavinovići - Siporeks)</button>
+          <button class="r-buttons">9 (Puračić - Tuzla)</button>
+          <button class="r-buttons">10 (Banovići - Tuzla)</button>
+        </div>
+      </div>
+      <hr id="bottom_hr" />
+
+      <div class="choose_div">
+        <select id="daySelect">
+          <option value="1">Radni dani</option>
+          <option value="6">Subota</option>
+          <option value="7">Nedjelja</option>
+        </select>
+
+        <select id="directionSelect">
+          <option value="1">Polazak</option>
+          <option value="2">Povratak</option>
+        </select>
+      </div>
+
+
+
+      <div class="main-card">
+        <div class="card-info">
+          <div class="time-info">
+            <p>08:00</p>
+            <p>08:30</p>
+          </div>
+
+          <div class="dots">
+            <span class="dot"></span>
+            <hr class="info-hr">
+            <span class="dot"></span>
+          </div>
+
+          <div class="stanica-info">
+              <p>Solina</p>
+              <p>Siporeks</p>
+          </div>
+
+          <div>
+            <button class="r-buttons-card">BAM 03.00</button>
+          </div>
+        </div>
+      </div>
+
   </div>
 
-    <div class="card" id="card_id">
-      <div class="card_info">
-        <div><button class="linija" id="n1">Linija 1</button></div>
-        <div>
-          <button class="linija" id="1" onclick="hrShow2(), scrollToDiv2()">
-            Linija 2
-          </button>
-        </div>
-        <div>
-          <button class="linija" id="3" onclick="hrShow2(), scrollToDiv2()">
-            Linija 3
-          </button>
-        </div>
-        <div><button class="linija" id="n2">Linija 4</button></div>
-        <div>
-          <button class="linija" id="5" onclick="hrShow2(), scrollToDiv2()">
-            Linija 5
-          </button>
-        </div>
-        <div><button class="linija" id="n3">Linija 6</button></div>
-        <div><button class="linija" id="n4">Linija 7</button></div>
-        <div><button class="linija" id="n5">Linija 8</button></div>
-        <div>
-          <button class="linija" id="7" onclick="hrShow2(), scrollToDiv2()">
-            Linija 9
-          </button>
-        </div>
-        <div>
-          <button class="linija" id="9" onclick="hrShow2(), scrollToDiv2()">
-            Linija 10
-          </button>
-        </div>
-        <div><button class="linija" id="n6">Linija 11</button></div>
-        <div><button class="linija" id="n7">Linija 13</button></div>
-        <div><button class="linija" id="n8">Linija 14</button></div>
-        <div><button class="linija" id="n9">Linija 15</button></div>
-        <div><button class="linija" id="n10">Linija 16</button></div>
-        <div><button class="linija" id="n11">Linija 18</button></div>
-        <div><button class="linija" id="n12">Linija 19</button></div>
-        <div>
-          <button class="linija" id="scroll_id" onclick="hrShow2()">
-            Linija 20
-          </button>
-        </div>
-        <div><button class="linija" id="n13">Linija 21</button></div>
-        <div><button class="linija" id="n14">Linija 22</button></div>
-        <div><button class="linija" id="n15">Linija 24</button></div>
-        <div><button class="linija" id="n16">Linija 28</button></div>
-        <div><button class="linija" id="n17">Linija 29</button></div>
-        <div><button class="linija" id="n18">Linija 30</button></div>
-        <div><button class="linija" id="n19">Linija 31</button></div>
-        <div><button class="linija" id="n20">Linija 38</button></div>
-        <div><button class="linija" id="n21">Linija 41</button></div>
-        <div><button class="linija" id="n22">Linija 42</button></div>
-        <div><button class="linija" id="n23">Linija 45</button></div>
-        <div><button class="linija" id="n24">Linija 50</button></div>
-        <div><button class="linija" id="n25">Linija 51</button></div>
-      </div>
-    </div>
-    <hr id="bottom_hr" />
-
+    
     <div class="linija_content" id="linija_C" style="display: none">
       <div class="span_and_hr">
         <span class="dot"></span>
@@ -118,23 +111,6 @@
       </div>
 
       <div class="linija_busInfo">
-        <!-- Dropdown meni za odabir dana u sedmici -->
-        <div class="choose_div">
-          <select id="daySelect">
-            <option value="1">Radni dani</option>
-            <option value="6">Subota</option>
-            <option value="7">Nedjelja</option>
-          </select>
-
-          <select id="directionSelect">
-            <option value="1">Outbound</option>
-            <option value="2">Inbound</option>
-          </select>
-
-          <select id="timeSelect">
-            <!-- Options will be populated dynamically -->
-          </select>
-        </div>
         <div class="main_bus" id="main_id">
           <div class="bus" id="add_css">
             <div class="img_div" id="img_id">

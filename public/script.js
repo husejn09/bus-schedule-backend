@@ -1,5 +1,4 @@
 
-
 document.getElementById("navbar-toggle").addEventListener("click", function () {
   document.querySelector(".navbar-list").classList.toggle("active");
 });
@@ -10,6 +9,17 @@ document
     document.querySelector(".navbar-list").classList.remove("active");
   });
 
+
+document.getElementById("linija-search-id").addEventListener("click", function(){
+  this.classList.toggle("clicked")
+})
+
+document.getElementById("linija-search-id").addEventListener("click", function(){
+  const routesDiv = document.getElementById("routes-main");
+  routesDiv.classList.toggle("routes-visible");
+  routesDiv.classList.toggle("routes");
+})
+
 function hrShow() {
   let m = document.getElementById("bottom_hr");
 
@@ -19,7 +29,15 @@ function hrShow() {
     m.style.display = "block";
   }
 }
-
+/*
+function routeShow(){
+  let n = document.getElementById("routes-main");
+  if (n.style.display === "block") {
+    n.style.display = "none";
+  } else {
+    n.style.display = "block";
+  } 
+}*/
 
 function hrShow2() {
     let n = document.getElementById("linija_C");
