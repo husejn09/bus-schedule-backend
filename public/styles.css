@@ -47,6 +47,13 @@ a {
   color: #33334f;
 }
 
+
+/* Show menu when toggle is active */
+.navbar-list.active {
+  display: flex;
+}
+
+
 /* Responsive styling */
 @media (max-width: 1125px) {
   .navbar-list {
@@ -134,11 +141,15 @@ a {
   #route-buttons-id{
     font-size: 80%;
   }
-}
 
-/* Show menu when toggle is active */
-.navbar-list.active {
-  display: flex;
+  #dots-id{
+    gap: 13px;
+  }
+
+  #dot1, #dot2{
+    width: 15px;
+    height: 15px;
+  }
 }
 
 
@@ -171,7 +182,10 @@ h2 {
   h2 {
     font-size: 3vw;
   }
- 
+  
+  .card-info{
+    font-size: small;
+  }
 }
 
 
@@ -261,7 +275,7 @@ h2 {
   display: none;
 }
 
-.routes-visible{
+.routes-visible {
   transition: opacity 0.5s ease;
 }
 
@@ -291,6 +305,12 @@ h2 {
   font-size: 95%;
   border: none;
   font-weight:bold;
+  cursor: pointer;
+}
+
+.r-buttons:hover{
+  background-color: #fff;
+  color: #000;
 }
 
 #bottom_hr {
@@ -301,7 +321,7 @@ h2 {
   display: none;
 }
 
-.choose_div{
+.choose-div{
   margin-top: 9%;
   display: flex;
   margin-left: auto;
@@ -327,6 +347,7 @@ select:hover{
 }
 
 .main-card{
+  display: none;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -371,7 +392,11 @@ select:hover{
   width: 60px;
   padding: 10px;
   font-weight: bold;
-  margin-left: 50px;
+  
+}
+
+.r-button-class{
+  margin-left: 20px;
 }
 
 .dot {
@@ -394,6 +419,22 @@ select:hover{
   font-weight: bold;
 
 }
+
+.arrow-logo{
+  height: 20px;
+  width: 20px;
+  margin-left: -5px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
 
 /* After linija click */
 
@@ -431,11 +472,6 @@ select:hover{
 
 
 @media screen and (max-width: 769px){
-  .dot{
-    height: 17px;
-    width: 17px;
-    
-  }
 
   #line_hr {
     margin-top: 18px;
