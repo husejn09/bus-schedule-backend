@@ -187,9 +187,63 @@ app.get('/route-stations/next/:routeId', async (req, res) => {
 
 
 
+app.get('/route-stations-show/next/:routeId', async (req, res) => {
+  const routeId = req.params.routeId;
+
+  const query = `
+      SELECT 
+          rs.station_id, 
+          st.station_name, 
+          st.latitude, 
+          st.longitude 
+      FROM 
+          route_stations rs
+      INNER JOIN 
+          stations st ON rs.station_id = st.station_id
+      WHERE 
+          rs.route_id = ?
+  `;
+
+  db.query(query, [routeId], async (err, results) => {
+      if (err) {
+          console.error('Greška pri dohvaćanju podataka:', err);
+          res.status(500).send('Greška pri dohvaćanju podataka');
+          return;
+      }
+
+      try {
+          const stations = results;
+
+          if (stations.length < 2) {
+              res.status(400).send('Nedovoljno stanica za izračunavanje vremena putovanja');
+              return;
+          }
+
+
+          const travelTimePromises = stations.slice(1).map((station, index) => {
+              const origin = `${stations[index].latitude},${stations[index].longitude}`;
+              const destination = `${station.latitude},${station.longitude}`;
+              const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${apiKey}`;
+              
+              return axios.get(url);
+          });
+
+          // Resolve all promises concurrently
+          const responses = await Promise.all(travelTimePromises);
+
+          // Extract travel times from responses
+          const travelTimes = responses.map((response, index) => ({
+              travelTime: response.data.routes[0].legs[0].duration.value
+          }));
+
+          res.json(travelTimes);
+      } catch (error) {
+          console.error('Greška pri dohvatanju podataka sa Google Maps API:', error);
+          res.status(500).send('Greška pri dohvatanju podataka sa Google Maps API');
+      }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-
-
