@@ -47,16 +47,16 @@
 
       <div class="routes" id="routes-main">
         <div class="route-buttons" id="route-buttons-id">
-          <button class="r-buttons">2 (Solina - Siporeks)</button>
-          <button class="r-buttons">3 (Moluhe - Gradina)</button>
-          <button class="r-buttons">5 (Slavinovići - Siporeks)</button>
-          <button class="r-buttons">9 (Puračić - Tuzla)</button>
-          <button class="r-buttons">10 (Banovići - Tuzla)</button>
+          <button class="r-buttons" id="1">2 (Solina - Siporeks)</button>
+          <button class="r-buttons" id="3">3 (Moluhe - Gradina)</button>
+          <button class="r-buttons" id="5">5 (Slavinovići - Siporeks)</button>
+          <button class="r-buttons" id="7">9 (Puračić - Tuzla)</button>
+          <button class="r-buttons" id="9">10 (Banovići - Tuzla)</button>
         </div>
       </div>
       <hr id="bottom_hr" />
 
-      <div class="choose_div">
+      <div class="choose-div" id="choose-div-id" style="display: none;">
         <select id="daySelect">
           <option value="1">Radni dani</option>
           <option value="6">Subota</option>
@@ -71,29 +71,12 @@
 
 
 
-      <div class="main-card">
-        <div class="card-info">
-          <div class="time-info">
-            <p>08:00</p>
-            <p>08:30</p>
-          </div>
-
-          <div class="dots">
-            <span class="dot"></span>
-            <hr class="info-hr">
-            <span class="dot"></span>
-          </div>
-
-          <div class="stanica-info">
-              <p>Solina</p>
-              <p>Siporeks</p>
-          </div>
-
-          <div>
-            <button class="r-buttons-card">BAM 03.00</button>
-          </div>
+      <div class="main-card" id="main-card-id">
+        <div id="stationContainer">
+          <div id="stationsContainer"></div>
         </div>
       </div>
+
 
   </div>
 
@@ -117,7 +100,7 @@
               <img
                 class="bus_icon"
                 alt="bus_icon"
-                src="assets/busIcon-black.png"
+                src="assets/bus-icon-black.png"
               />
             </div>
             <div class="time_div" id="time_id">
@@ -128,7 +111,7 @@
               <p id="station_name">station name</p>
             </div>
           </div>
-          <div id="stationsContainer"></div>
+          
         </div>
       </div>
     </div>
