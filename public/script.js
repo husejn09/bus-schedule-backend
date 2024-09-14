@@ -189,19 +189,22 @@ async function handleDepartureTimes(route_id, day_of_week) {
           console.error("No departure times found");
           return;
       }
-
-      const stationContainer = document.getElementById("stationContainer");
+      
+      const stationContainer = document.getElementById("main-card-id");
       stationContainer.innerHTML = ""; 
 
       for (const time of departureTimes) {
           const cardDiv = document.createElement("div");
           cardDiv.className = "card-info";
+          cardDiv.id = "card-info-id";
 
           const endTime = await calculateTotalTravelTime(route_id, time.departure_time); 
           const stationShow = await startEndStation(route_id);
 
           const startTime = time.departure_time.slice(0,5);
+          const uniqueTimeId = time.departure_time.replace(/[:]/g, "")
           cardDiv.innerHTML = `
+          <div class="card-info-first-part">
               <div class="time-info">
                   <p id="start-time">${startTime}</p>
                   <p id="end-time">${endTime}</p>
@@ -221,12 +224,21 @@ async function handleDepartureTimes(route_id, day_of_week) {
               <div class="r-button-class">
                   <button class="r-buttons-card">BAM 03.00</button>
               </div>
-              <div>
-                  <img src="assets/down-arrow.png" alt="arrow-logo" class="arrow-logo" id="arrow-id">
+              <div class="img-class">
+                  <img src="assets/down-arrow.png" alt="arrow-logo" class="arrow-logo" id="arrow-id-${uniqueTimeId}">
               </div>
+            </div>
+              <div id="stationsContainer"></div>
           `;
 
-          stationContainer.appendChild(cardDiv); // Append the new card to the container
+          stationContainer.appendChild(cardDiv); // Append the new card to the container      
+          
+          
+          const arrowElement = document.getElementById(`arrow-id-${uniqueTimeId}`);
+          arrowElement.addEventListener("click", async function () {
+            await showTravelTime(route_id, time.departure_time); 
+          });
+
       }
   } catch (error) {
       console.error("Error fetching and displaying departure times:", error);
@@ -234,7 +246,7 @@ async function handleDepartureTimes(route_id, day_of_week) {
 }
 
 
-async function showTravelInfo(route_id) {
+async function getTravelInfo(route_id) {
   try {
       const response = await fetch(
         `http://localhost:3000/route-stations-show/next/${route_id}`
@@ -249,7 +261,7 @@ async function showTravelInfo(route_id) {
 // Function to calculate total travel time (based on your existing travel calculation logic)
 async function calculateTotalTravelTime(route_id, departure_time) {
   try {
-      const stationData = await showTravelInfo(route_id); 
+      const stationData = await getTravelInfo(route_id); 
 
       if (!stationData || stationData.length === 0) {
           console.error("No station data found");
@@ -306,8 +318,7 @@ async function showTravelTime(route_id, departure_time) {
             console.error("No departure time found");
             return;
         }
-        let initialTime = document.getElementById('timeSelect').value;
-        String(initialTime); 
+        let initialTime = departure_time; 
 
         // Function to add seconds to a date
         const addSecondsToDate = (date, seconds) => {
@@ -334,7 +345,8 @@ async function showTravelTime(route_id, departure_time) {
         let currentTime = new Date();
         const initialTimeParts = initialTime.split(':').map(Number);
         currentTime.setHours(initialTimeParts[0], initialTimeParts[1], initialTimeParts[2]);
-    
+
+
         const stationsContainer = document.getElementById("stationsContainer");
         stationsContainer.innerHTML = "";
         data.forEach((station, index ) => {
@@ -353,7 +365,7 @@ async function showTravelTime(route_id, departure_time) {
             `;
 
     stationsContainer.appendChild(stationDiv);
-
+    
 });
         
     } catch (error) {
