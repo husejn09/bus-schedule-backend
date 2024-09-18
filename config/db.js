@@ -1,26 +1,19 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 require('dotenv').config();
-const host = process.env.DB_HOST;
-const user = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
-const database = process.env.DB_DATABASE;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
 
 
 
-const connection = mysql.createConnection({
-  host: host, 
-  user: user,      
-  password: password, 
-  database: database, 
-  port: 3306
+const pool = mysql.createPool({
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
+  port: 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-connection.connect(err => {
-  if (err) {
-    console.error('Greška pri povezivanju s bazom:', err);
-    return;
-  }
-  console.log('Uspješno povezano s bazom!');
-});
 
-module.exports = connection;
+module.exports = pool;
