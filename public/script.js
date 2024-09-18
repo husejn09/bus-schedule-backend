@@ -51,36 +51,14 @@ function showInfo(){
 }
 
 
-function linijaButton() {
-  let n = document.getElementById("card_id");
-
-  if (n.classList.contains("show")) {
-    n.classList.remove("show");
-    setTimeout(() => {
-      n.style.display = "none";
-    }, 500);
-  } else {
-    n.style.display = "block";
-    setTimeout(() => {
-      n.classList.add("show");
-    }, 15);
-  }
-
-  setTimeout(() => {
-    scrollToDiv();
-  }, 150);
-}
-
-
-
-// Globalna promenljiva za cuvanje ID-a rute
+// Global routeId
 let globalRouteId;
 
-// Opšti handler funkcija za rute
+// Handler for routes
 async function handleRouteClick(routeId) {
     globalRouteId = routeId;
 
-    // Odredjivanje dana u sedmici
+    // Day of the week
     let day_of_week = document.getElementById("daySelect").value;
     if (day_of_week == 1) {
         day_of_week = "Monday";
@@ -90,33 +68,33 @@ async function handleRouteClick(routeId) {
         day_of_week = "Sunday";
     }
 
-    // Odabir smjera
     const selectedDirection = document.getElementById("directionSelect").value;
-
-
-    // Određivanje ID-a rute na osnovu smjera
     let route_id = selectedDirection == 1 ? globalRouteId : globalRouteId + 1;
-
-    // Ako imamo validan ID rute, pozivamo prikaz funkcije
+ 
     if (route_id) {
         await handleDepartureTimes(route_id, day_of_week);
-
     } else {
         console.log("Greška prilikom fetch-a");
     }
 }
 
-// Dodavanje event listenera za sve dugmadi odjednom
+// Eventlistener for all the buttons
 const routeButtons = [1, 3, 5, 7, 9];
 routeButtons.forEach((routeId) => {
   document.getElementById(routeId.toString()).addEventListener("click", function () {
     showInfo();
     handleRouteClick(routeId);
+    /*setTimeout(() => {
+      window.scrollTo({
+        top: 400,
+        behavior: 'smooth'
+      });
+    }, 600);*/
   });
 });
 
 
-// Uzimanje podataka za odabir vremena polaska
+// Getting data for departure time
 async function departureTime(route_id, day_of_week) {
   try {
     const response = await fetch(
@@ -130,7 +108,7 @@ async function departureTime(route_id, day_of_week) {
 }
 
 
-// Event listener za odabir pravca (Outbound/Inbound)
+// Eventlistener for direction (Outbound/Inbound)
 document.getElementById("directionSelect").addEventListener("change", async function() {
     const selectedDirection = this.value; // 1 za Outbound, 2 za Inbound
 
@@ -144,7 +122,6 @@ document.getElementById("directionSelect").addEventListener("change", async func
     } else {
         day_of_week = "Sunday";
     }
-   // await prikazStartEnd(route_id);
     await handleDepartureTimes(route_id, day_of_week);
     
 });
@@ -162,8 +139,7 @@ document.getElementById("daySelect").addEventListener("change", async function()
     } else {
         day_of_week = "Sunday";
     }
-    
-   // await prikazStartEnd(route_id);
+  
     await handleDepartureTimes(route_id, day_of_week);
 });
 
@@ -202,7 +178,7 @@ async function handleDepartureTimes(route_id, day_of_week) {
           const stationShow = await startEndStation(route_id);
 
           const startTime = time.departure_time.slice(0,5);
-          const uniqueTimeId = time.departure_time.replace(/[:]/g, "")
+          const uniqueTimeId = time.departure_time.replace(/[:]/g, "");
           cardDiv.innerHTML = `
           <div class="card-info-first-part">
               <div class="time-info">
@@ -228,17 +204,31 @@ async function handleDepartureTimes(route_id, day_of_week) {
                   <img src="assets/down-arrow.png" alt="arrow-logo" class="arrow-logo" id="arrow-id-${uniqueTimeId}">
               </div>
             </div>
-              <div id="stationsContainer"></div>
+              <div id="stationsContainer-${uniqueTimeId}" class="slide-in"></div>
           `;
 
-          stationContainer.appendChild(cardDiv); // Append the new card to the container      
-          
-          
-          const arrowElement = document.getElementById(`arrow-id-${uniqueTimeId}`);
-          arrowElement.addEventListener("click", async function () {
-            await showTravelTime(route_id, time.departure_time); 
+          stationContainer.appendChild(cardDiv);      
+          window.scrollTo({
+            top: 300,
+            behavior: 'smooth'
           });
 
+
+          const arrowElement = document.getElementById(`arrow-id-${uniqueTimeId}`);
+          arrowElement.addEventListener("click", async function () {
+            arrowElement.classList.toggle("arrow-logo-up");
+            arrowElement.classList.toggle("arrow-logo");
+            await showTravelTime(route_id, time.departure_time); 
+            const showDetails = document.getElementById(`stationsContainer-${uniqueTimeId}`);
+            if(showDetails.style.display === "block")
+              showDetails.style.display = "none"
+            else
+              showDetails.style.display = "block"
+            let slide = showDetails.classList.contains("slide-in");
+            showDetails.setAttribute("class", slide ? "slide-out" : "slide-in")
+
+
+          });
       }
   } catch (error) {
       console.error("Error fetching and displaying departure times:", error);
@@ -258,7 +248,7 @@ async function getTravelInfo(route_id) {
     }
 }
 
-// Function to calculate total travel time (based on your existing travel calculation logic)
+
 async function calculateTotalTravelTime(route_id, departure_time) {
   try {
       const stationData = await getTravelInfo(route_id); 
@@ -268,17 +258,17 @@ async function calculateTotalTravelTime(route_id, departure_time) {
           return "N/A";
       }
 
-      // Initialize start time with the departure time
+      // Initialize start time
       let currentTime = new Date();
       const initialTimeParts = departure_time.split(':').map(Number);
       currentTime.setHours(initialTimeParts[0], initialTimeParts[1], initialTimeParts[2]);
 
-      // Loop through each station and add travel time to the current time
+      
       stationData.forEach(station => {
           currentTime.setSeconds(currentTime.getSeconds() + station.travelTime);
       });
 
-      // Format the calculated time into HH:MM:SS format for display
+      // Format the calculated time into HH:MM:SS format 
       const hours = String(currentTime.getHours()).padStart(2, '0');
       let minutes = String(currentTime.getMinutes());
       const seconds = String(currentTime.getSeconds());
@@ -296,8 +286,7 @@ async function calculateTotalTravelTime(route_id, departure_time) {
 }
 
 
-// Funkcija za prikaz vremena polaska
-
+// Function for getting travel times
 async function getTravelTime(route_id) {
     try {
         const response = await fetch(
@@ -327,7 +316,6 @@ async function showTravelTime(route_id, departure_time) {
             return d;
         };
 
-        // Function to round seconds and format time as HH:MM:SS
         const adjustTime = (date, secondsToAdd) => {
             const roundedSeconds = secondsToAdd >= 20 ? 60 : 0;
             const newDate = addSecondsToDate(date, roundedSeconds);
@@ -345,9 +333,9 @@ async function showTravelTime(route_id, departure_time) {
         let currentTime = new Date();
         const initialTimeParts = initialTime.split(':').map(Number);
         currentTime.setHours(initialTimeParts[0], initialTimeParts[1], initialTimeParts[2]);
-
-
-        const stationsContainer = document.getElementById("stationsContainer");
+        const uniqueTimeId = departure_time.replace(/[:]/g, "");
+       
+        const stationsContainer = document.getElementById(`stationsContainer-${uniqueTimeId}`);
         stationsContainer.innerHTML = "";
         data.forEach((station, index ) => {
             const stationDiv = document.createElement("div");
