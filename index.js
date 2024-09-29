@@ -12,10 +12,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 
-// Limit 10 requests per IP every 15 minutes
+
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // Limit each IP to 10 requests per windowMs
+  windowMs: 15 * 60 * 1000, 
+  max: 10, 
   message: 'Too many requests, please try again later.'
 });
 
@@ -23,6 +23,9 @@ app.use('/register', limiter);
 app.use('/login', limiter);
 
 app.use(cors());
+app.use(cors({
+    origin: 'http://127.0.0.1:5500' 
+  }));
 
 app.use(express.static('public'));
 
@@ -266,7 +269,8 @@ app.post('/register', async (req, res) => {
     }
   
     try {
-      const [result] = await db.query('SELECT * FROM Users WHERE username = ?', [username]);
+      const connection = await pool.getConnection();
+      const [result] = await connection.query('SELECT * FROM Users WHERE username = ?', [username]);
       if (result.length === 0) {
         return res.status(400).json({ msg: 'User not found' });
       }
@@ -318,8 +322,7 @@ app.post('/register', async (req, res) => {
     });
   });
   
-
+*/
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   }); 
-  */
