@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="cart-styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="assets\logoG.png" alt="Logo" class="logo" />
+    </div>
+    <ul class="navbar-list list">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Spisak linija</a></li>
+      <li><a href="#">Spisak stanica</a></li>
+      <li><a href="#">O projektu</a></li>
+      <li><a href="login-register.html">Login/Register</a></li>
+      <li id="user-menu"></li>
+      <li><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
+      <li class="close-btn" style="text-align: center; font-size: 30px">
+        &times;
+      </li>
+    </ul>
+    <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
+  </nav>
+
+    <div class="outer-div">
+    <div class="main-cart">
+      <div class="route-info">
+          <h1 class="app-name">Gips Bus Check</h1>
+          <div class="exact-route" id="exact-route-id"></div>
+          <div class="outer-div-info"> 
+            <label for="count" id="number-of-tickets">Količina:
+              <input type="number" id="count" value="1" max="10" min="1" inputmode="numeric">
+            </label>
+            <div class="price">
+              <p id="total-price"> Ukupna cijena:</p><p id="price-id" >3,00 BAM</p>
+            </div>
+            <label for="buy-ticket" class="ticket-button">
+              <input type="submit" id="buy-ticket" value="Kupi kartu">
+            </label>
+          </div>
+      </div>
+    </div>
+    
+    <div class="ticket-info" id="ticket-info-id">
+      <div></div>
+      <div class="exact-route-info">
+        <div class="date-info">
+          <div id="date-word">Datum:</div>
+          <div class="new-date" id="new-date-id">05 Sep 2024</div>
+        </div>
+
+        <div class="user-info">
+          <div id="username-word">Username:</div>
+          <div class="username" id="username-id">lkjhfsah</div>
+        </div>
+
+        <div class="user-email">
+          <div id="email-word">E-mail:</div>
+          <div class="user-email" id="user-email-id">example@example.com</div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="barcode-container">
+        <svg id="barcode"></svg>
+      </div>
+      <div class="random" id="random-numbers"></div>
+      <div class="download-button"><img src="assets/download-icon.png" alt="download-icon" class="download-icon"></div>
+    </div>
+  </div> 
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="cart-js.js"></script>
+</body>
+</html>
