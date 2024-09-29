@@ -229,10 +229,11 @@ h2 {
   color: #33334f;
 }
 
-.linija-search:hover, .stanica-search:hover{
-  transition: background-color 0.3s;
-  background-color: hsl(240, 22%, 25%, 84%);
-  color: white;
+@media (hover: hover) {
+  .linija-search:hover, .stanica-search:hover {
+    background-color: hsl(240, 22%, 25%, 84%);
+    color: white;
+  }
 }
 
 .linija-search.clicked{

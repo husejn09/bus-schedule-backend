@@ -11,15 +11,14 @@ document
 
 /* Event listener for button to stay clicked */
 document.getElementById("linija-search-id").addEventListener("click", function(){
-  this.classList.toggle("clicked")
-})
+  this.classList.toggle("clicked");
 
-/* Event listener for showing routes */
-document.getElementById("linija-search-id").addEventListener("click", function(){
+
   const routesDiv = document.getElementById("routes-main");
   routesDiv.classList.toggle("routes-visible");
   routesDiv.classList.toggle("routes");
 })
+
 
 /* Function for showing hr on button click - called in HTML */ 
 function hrShow() {
