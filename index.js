@@ -29,12 +29,11 @@ app.use(cors({
 
 app.use(express.static('public'));
 
-// Middleware za parsiranje JSON-a
+// Middleware for parsing JSON
 app.use(express.json());
 
 
-// Test DB rutu
-
+// Test DB route
 const pool = require('./config/db');
 app.get('/test-db', (req, res) => {
   db.query('SELECT 1 + 1 AS solution', (err, results) => {
@@ -56,7 +55,7 @@ app.use('/api', stationRoutes);
 app.use('/api', routeRoutes);
 
 
-//Ruta za prikaz koordinata stanica
+//Route to display station coordinates
 app.get('/stations/coordinates/:routeId', async (req, res) => {
     const routeId = req.params.routeId;
     const query = 'SELECT s.station_id, s.latitude, s.longitude FROM stations s JOIN route_stations rs ON s.station_id = rs.station_id WHERE rs.route_id = ?';
@@ -71,7 +70,7 @@ app.get('/stations/coordinates/:routeId', async (req, res) => {
   
 
 
-//Ruta za dohvatanje vremena polazka zbog popunjavanja odabira za korisnika 
+//Route to retrieve the departure time due to filling in the selection for the user
 app.get('/schedules/:routeId/:dayOfWeek', async (req, res) => {
     const routeId = req.params.routeId;
     const dayOfWeek = req.params.dayOfWeek;
@@ -87,7 +86,7 @@ app.get('/schedules/:routeId/:dayOfWeek', async (req, res) => {
   
 
 
-// Dohvatanje prve i zadnje stanice
+// API route for the first and last station
 app.get('/route_stations/:routeId', async (req, res) => {
     const routeId = req.params.routeId;
     const query = 'SELECT s.station_name FROM route_stations rs INNER JOIN stations s ON rs.station_id = s.station_id WHERE rs.route_id = ?';
@@ -102,7 +101,7 @@ app.get('/route_stations/:routeId', async (req, res) => {
     }
   });
   
-
+// API route for getting all the info about all stations for exact route, dayofWeek and exact departure time
   app.get('/schedule-with-stations/:routeId/:dayOfWeek', async (req, res) => {
     const routeId = req.params.routeId;
     const dayOfWeek = req.params.dayOfWeek;
@@ -131,7 +130,11 @@ app.get('/route_stations/:routeId', async (req, res) => {
       res.status(500).send('Greška pri dohvaćanju podataka');
     }
   });
-  
+
+// API route for getting all the data for exact route, without departure time,
+// used this with google API to calculate how much time is needed from station to station inside a route
+// using their latitude and longitude, the result is the calculated time in seconds, also retrieving 
+// the stations info so it can be used to get the first and the last station
   app.get('/route-stations/next/:routeId', async (req, res) => {
     const routeId = req.params.routeId;
     const query = `
@@ -179,7 +182,8 @@ app.get('/route_stations/:routeId', async (req, res) => {
   });
   
 
-
+// API route for getting all the data for exact route, without departure time,
+// used this with google API to calculate how much time is needed from start to the end
   app.get('/route-stations-show/next/:routeId', async (req, res) => {
     const routeId = req.params.routeId;
     const query = `
@@ -227,7 +231,9 @@ app.get('/route_stations/:routeId', async (req, res) => {
 
 
 
-
+// API route for the register page, limited users to 50 for testing purposes,
+// testing if the user is already in database then hashing the password that is provided
+// using the bycrypt hash, and then if all conditions are met user is inserted into database
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
   
@@ -249,7 +255,7 @@ app.post('/register', async (req, res) => {
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      // Insert the new user
+      // Inserting the new user
       await connection.query('INSERT INTO Users (username, email, password) VALUES (?, ?, ?)', [username, email, hashedPassword]);
   
       res.status(201).json({ msg: 'User registered successfully' });
@@ -260,7 +266,10 @@ app.post('/register', async (req, res) => {
   });
   
   
-
+// API route for the login page, user must enter all the fields
+// testing if the user info is matching with the one in the database, if it is  
+// generate the JWT token which will be a session based and will expire in 1 hour
+// if there is no token redirect the user to login again
   app.post('/login', async (req, res) => {
     const { username, password } = req.body;
   
@@ -283,7 +292,7 @@ app.post('/register', async (req, res) => {
       }
   
       // Generate the JWT token
-      const token = jwt.sign({ id: user.userid, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.user_id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
   
       res.status(200).json({ msg: 'Login successful', token });
     } catch (err) {
@@ -292,37 +301,40 @@ app.post('/register', async (req, res) => {
     }
   });
 
-
-  const authenticateToken = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1]; 
-  
-    if (!token) return res.redirect('/login'); // If no token, redirect to login page
-  
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403); 
-      req.user = user; 
-      next(); 
-    });
-  };
-    
-  /* in progress
-  app.post('/buy-ticket', authenticateToken, (req, res) => {
-    
-    const ticketInfo = {
-      username: req.user.username, 
-      busRoute: 'Route 123',
-      price: 'Free (simulation)'
-    };
-  
-    
-    res.send({
-      message: 'Ticket purchased successfully!',
-      ticket: ticketInfo,
-      downloadLink: '/download-ticket'
-    });
+  // API for getting user info from database. Uses authenticateToken() function, which takes the token and 
+  //  extracts the user id from the JWT token provided so the user info will connect to the user on the client 
+  app.get('/api/userinfo', authenticateToken, async (req, res) => {
+    try {
+      const [rows] = await pool.query('SELECT username, email FROM users WHERE user_id = ?', [req.user.id]);
+      if (rows.length === 0) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json(rows[0]); // Return the first (and only) row
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
   });
   
-*/
+  function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];  
+  
+    if (!token) return res.status(401).send('Unauthorized');
+  
+    // Debugging
+    console.log('Token received:', token);
+  
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+      if (err) {
+        console.error('Token verification failed:', err);
+        return res.status(403).send('Invalid token');
+      }
+      req.user = user;  // Attach the user object from token to request
+      next();
+    });
+  }
+  
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   }); 
