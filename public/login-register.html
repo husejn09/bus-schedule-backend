@@ -13,13 +13,10 @@
           <img src="assets\logoG.png" alt="Logo" class="logo" />
         </div>
         <ul class="navbar-list list">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Spisak linija</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="#">Spisak stanica</a></li>
-          <li><a href="#">O projektu</a></li>
           <li><a href="#">Login/Register</a></li>
-          <li id="user-menu"></li>
-          <li><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
+          <li id="cart-img"><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
           <li class="close-btn" style="text-align: center; font-size: 30px">
             &times;
           </li>
@@ -29,7 +26,7 @@
 
     <div class="container">
         <div class="main-content">
-            <h1>Gips Bus Check</h1>
+            <h1 id="heading">Gips Bus Check</h1>
             <form class="login-form" id="login-form-id">
                 <label for="login-username">Username</label>
                 <input id="login-username" name="login-username" required="" type="username" placeholder="John" autocomplete="on"/>
@@ -55,7 +52,7 @@
     </div>
 
       <script src="login-js.js"></script>
-
+      <script src="auth.js" ></script>
 
       
 </body>

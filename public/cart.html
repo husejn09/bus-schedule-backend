@@ -12,13 +12,10 @@
       <img src="assets\logoG.png" alt="Logo" class="logo" />
     </div>
     <ul class="navbar-list list">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Spisak linija</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="#">Spisak stanica</a></li>
-      <li><a href="#">O projektu</a></li>
-      <li><a href="login-register.html">Login/Register</a></li>
-      <li id="user-menu"></li>
-      <li><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
+      <li><a href="login-register.html?redirect=cart.html" id="login-navbar">Login/Register</a></li>
+      <li id="cart-img"><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;" href="cart.html"></li>
       <li class="close-btn" style="text-align: center; font-size: 30px">
         &times;
       </li>
@@ -26,7 +23,8 @@
     <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
   </nav>
 
-    <div class="outer-div">
+  <p id="empty-cart">Your cart is empty</p>
+    <div class="outer-div" id="outer-div-id">
     <div class="main-cart">
       <div class="route-info">
           <h1 class="app-name">Gips Bus Check</h1>
@@ -46,11 +44,11 @@
     </div>
     
     <div class="ticket-info" id="ticket-info-id">
-      <div></div>
+      <div class="main-card"></div>
       <div class="exact-route-info">
         <div class="date-info">
           <div id="date-word">Datum:</div>
-          <div class="new-date" id="new-date-id">05 Sep 2024</div>
+          <div class="new-date" id="new-date-id">25 Sep 2024</div>
         </div>
 
         <div class="user-info">
@@ -63,16 +61,19 @@
           <div class="user-email" id="user-email-id">example@example.com</div>
         </div>
       </div>
-      <hr>
+      <hr id="dashed-hr">
 
       <div class="barcode-container">
         <svg id="barcode"></svg>
       </div>
       <div class="random" id="random-numbers"></div>
-      <div class="download-button"><img src="assets/download-icon.png" alt="download-icon" class="download-icon"></div>
+      <div class="download-button"><img src="assets/download-icon.png" alt="download-icon" class="download-icon" id="download-ticket"></div>
     </div>
   </div> 
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="auth.js" ></script>
     <script src="cart-js.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 </body>
 </html>

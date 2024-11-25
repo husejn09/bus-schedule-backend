@@ -12,12 +12,10 @@
         <img src="assets\logoG.png" alt="Logo" class="logo" />
       </div>
       <ul class="navbar-list list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Spisak linija</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#">Spisak stanica</a></li>
-        <li><a href="#">O projektu</a></li>
-        <li><a href="login-register.html">Login/Register</a></li>
-        <li><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
+        <li><a href="login-register.html?redirect=index.html" id="login-navbar">Login/Register</a></li>
+        <li id="cart-img"><img src="assets/shopping-bag.png" alt="shopping-cart-icon" style="width: 20px;"></li>
         <li class="close-btn" style="text-align: center; font-size: 30px">
           &times;
         </li>
@@ -34,13 +32,13 @@
 
       <div class="main-search"> 
         <div class="linija-search" id="linija-search-id" onclick="hrShow()">
-            <img src="assets/bus-icon-b.png" alt="bus-icon" class="busIcon-black">
-            <p class="text-search">Linija</p>
+            <img src="assets/bus-icon-b.png" alt="bus-icon" class="busIcon-black" id="busIcon-black-id">
+            <p class="text-search" id="text-search-id">Linija</p>
         </div>
 
         <div class="stanica-search" id="stanica-search-id">
-            <img src="assets/bus-icon-blue.png" alt="station-icon" class="bus-stopcom">
-            <p class="text-search">Stanica</p>
+            <img src="assets/bus-icon-blue.png" alt="station-icon" class="bus-stopcom" id="bus-stopcom-id">
+            <p class="text-search" id="text-search-id-2">Stanica</p>
         </div>
       </div>
 
@@ -74,7 +72,7 @@
       <div class="main-card" id="main-card-id">
       </div>  
   </div>
-  
+    <script src="auth.js" ></script>
     <script src="script.js"></script>
   </body>
 </html>
