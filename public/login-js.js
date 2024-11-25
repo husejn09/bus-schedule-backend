@@ -1,3 +1,5 @@
+
+// Event listener for the register form to show or dissapear
 document.getElementById("register-id").addEventListener("click", () =>{
     const login = document.getElementById("login-form-id");
     const register = document.getElementById("register-form-id");
@@ -5,6 +7,7 @@ document.getElementById("register-id").addEventListener("click", () =>{
     register.style.display = "block";
 })
 
+// Event listener for the login form to show or dissapear
 document.getElementById("login-id").addEventListener("click", () =>{
     const login = document.getElementById("login-form-id");
     const register = document.getElementById("register-form-id");
@@ -22,44 +25,43 @@ document
     document.querySelector(".navbar-list").classList.remove("active");
 });
 
-
+// Event listener for submiting the login form and checking if the fetch will pass
+// if the user came from the cart page and needs to login, if he logs in redirect him back to where he was
+// if the user came from the homepage directly to login redirect him where he was
 document.getElementById('login-form-id').addEventListener('submit', async (event) => {
-    event.preventDefault(); 
-    
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
-  
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectPage = urlParams.get('redirect') || 'home';
+  event.preventDefault();
 
-    try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-  
-      const result = await response.json();
-  
-      if (response.ok) {
-        localStorage.setItem('token', result.token);
-        alert('Login successful');
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
 
-        if (redirectPage === 'cart') {
-            window.location.href = '/cart'; // Redirect to the cart page
-          } else {
-            window.location.href = '/public/index.html'; // Redirect to the home page
-          }
-        
-      } else {
-        alert(result.msg || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
+  // Get the redirect parameter from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectPage = urlParams.get('redirect') || 'index.html';
+
+  try {
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem('token', result.token);
+      alert('Login successful');
+      window.location.href = redirectPage; // Redirect back to the original page
+    } else {
+      alert(result.msg || 'Login failed');
     }
-  });
-  
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
 
+  
+// Event listener for the register form, if the user register successfully redirect him to the login form
+// if not try again
   document.getElementById('register-form-id').addEventListener('submit', async (event) => {
     event.preventDefault(); 
     
@@ -92,7 +94,9 @@ document.getElementById('login-form-id').addEventListener('submit', async (event
     }
   });
   
-
+  document.getElementById("cart-img").addEventListener("click", () => {
+    window.location.href ="cart.html";
+  })
 
 
 
