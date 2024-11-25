@@ -136,7 +136,7 @@
 }
 .main-content h1 {
     color: #33334f;
-    font-size: 36px;
+    font-size: 31px;
     margin-bottom: 20px;
 }
 .login-form {
@@ -249,3 +249,6 @@ button{
     float: right;
 }
 
+#cart-img{
+  cursor: pointer;
+}

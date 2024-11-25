@@ -134,9 +134,9 @@ a {
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  padding-left: 100px;
-  padding-right: 100px;
+  gap: 50px;
+  padding-left: 80px;
+  padding-right: 80px;
 }
 
 h1, label, .price, #number-of-tickets, #count{
@@ -147,7 +147,7 @@ h1, label, .price, #number-of-tickets, #count{
   display: flex;
   font-weight: bold;
   font-size: x-large;
-  margin-top: 50px;
+  
   align-items: center;
 }
 
@@ -167,6 +167,7 @@ h1, label, .price, #number-of-tickets, #count{
   margin-left: auto;
   margin-right: auto;
   text-wrap: nowrap;
+  margin-bottom: 0px;
 }
 
 .price {
@@ -176,17 +177,13 @@ h1, label, .price, #number-of-tickets, #count{
   margin-top: 0;
   padding-top: 0%;
   font-weight: bold;
-  font-size: large;
+  font-size: x-large;
 }
 
 #price-id{
   margin-left: 10px;
   font-size: xx-large;
   
-}
-
-.price{
-  font-size: x-large;
 }
 
 .ticket-button{
@@ -217,7 +214,6 @@ h1, label, .price, #number-of-tickets, #count{
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 5%; 
-  border: 2px solid black;
   gap: 30px;
 }
 
@@ -227,6 +223,7 @@ h1, label, .price, #number-of-tickets, #count{
   text-wrap: nowrap;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0px;
 }
 
 @media screen and (max-width: 1050px) {
@@ -235,7 +232,10 @@ h1, label, .price, #number-of-tickets, #count{
     margin-right: auto;
   }
 
-  
+  .route-info{
+    padding-left: 70px;
+    padding-right: 70px;
+  }
 
 }
 
@@ -244,6 +244,11 @@ h1, label, .price, #number-of-tickets, #count{
     border-radius: 80px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .route-info{
+    padding-left: 50px;
+    padding-right: 50px;
   }
 
   #number-of-tickets, #total-price, #price-id{
@@ -266,6 +271,18 @@ h1, label, .price, #number-of-tickets, #count{
     font-weight: bold;
     text-align: start;
   }
+  
+}
+
+@media screen and (max-width: 452px) {
+  .stanica-info{
+    font-size: 3.2vw;
+  }
+
+  .time-info{
+    font-size: 3.2vw;
+  }
+
 }
 
 @media screen and (max-width: 426px) {
@@ -275,12 +292,38 @@ h1, label, .price, #number-of-tickets, #count{
     margin-right: auto;
   }
 
+  .route-info{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
   #number-of-tickets, #total-price, #price-id{
     font-size: medium;
   }
 
+  .stanica-info{
+    font-size: smaller;
+  }
+
+  .time-info{
+    font-size: smaller;
+  }
+
+  #dot1, #dot2{
+    width: 15px;
+    height: 15px;
+  }
+
+  #dots-id {
+    gap: 13px;
+  }
+
+  .r-buttons-card{
+    font-size: small;
+  }
+
   .app-name{
-    font-size: x-large;
+    font-size: xx-large;
   }
 
   #buy-ticket{
@@ -289,10 +332,7 @@ h1, label, .price, #number-of-tickets, #count{
     font-size: medium;
   }
 
-  .route-info{
-    padding-left: 80px;
-    padding-right: 80px;
-  }
+
 }
 
 @media screen and (max-width: 376px) {
@@ -301,8 +341,8 @@ h1, label, .price, #number-of-tickets, #count{
   }
 
   .route-info{
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
@@ -312,8 +352,8 @@ h1, label, .price, #number-of-tickets, #count{
   }
 
   .route-info{
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -338,11 +378,11 @@ h1, label, .price, #number-of-tickets, #count{
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 40%;
+  margin-top: 40px;
   padding-left: 30px;
 }
 
-hr{
+#dashed-hr{
   border: none;
   border-top: 2px dashed hsl(240, 22%, 25%, 50%); 
   width: 90%;
@@ -397,4 +437,95 @@ hr{
   height: 70px;
   width: 300px;
   
+}
+#cart-img{
+  cursor: pointer;
+}
+#empty-cart{
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10%;
+  font-style: italic;
+  display: none;
+}
+
+#cart-img{
+  cursor: pointer;
+}
+
+/* Styles for the the div that will come from the main page  */
+
+.card-info{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px 10px 25px;
+  border-radius: 25px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content:center ;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 70px;
+}
+
+.card-info-first-part{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content:center ;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.dots{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-hr{
+  height: 35px;
+  margin-top: -15px;
+  margin-bottom: -15px;
+  width: 1px;
+  border: none;
+  background-color: hsl(240, 22%, 25%, 84%);
+}
+
+
+
+.r-button-class{
+  display: none;
+}
+
+.dot {
+  height: 17px;
+  width: 17px;
+  background-color: #33334f;
+  border-radius: 50%;
+
+}
+
+.time-info{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.stanica-info{
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+
+}
+
+.img-class{
+  display: none;
 }

@@ -50,7 +50,7 @@ a {
 }
 
 /* Responsive styling for mobile devices */
-@media (max-width: 1125px) {
+@media (max-width: 1000px) {
   .navbar-list {
     display: flex;
     position: fixed;
@@ -107,7 +107,7 @@ a {
 }
 
 /* Hide close button on desktop view */
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   .navbar-list .close-btn {
     display: none;
   }
@@ -191,13 +191,64 @@ h2 {
   }
 }
 
+@media screen and (max-width: 589px) {
+  #h1-id{
+    font-size: 7vw;
+  }
+
+  #h2-id{
+    font-size: 3vw;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #h1-id{
+    font-size: 7vw;
+  }
+
+  #h2-id{
+    font-size: 3vw;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  #linija-search-id, #stanica-search-id{
+    height: 3em;
+    width: 3em;
+    border-radius: 20px;
+  }
+
+  #stanica-search-id, #linija-search-id{
+    padding-bottom: 8px;
+  }
+
+  #busIcon-black-id{
+    width: 25px;
+    height: 25px;
+  }
+
+  #bus-stopcom-id{
+    width: 27px;
+    height: 27px;
+  }
+
+  #text-search-id-2{
+    font-size: small;
+    
+  }
+  #text-search-id{
+    font-size: small;
+  }
+}
 
 .landing-div{
   background-color: hsl(203, 74%, 53%, 81%);
   height: max-content;
   border-radius: 70px;
   
-  max-width: 90%;
+  max-width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
@@ -414,6 +465,11 @@ select:hover{
   
 }
 
+.r-buttons-card:hover{
+  cursor: pointer;
+  font-size: medium;
+}
+
 .r-button-class{
   margin-left: 20px;
 }
@@ -592,6 +648,6 @@ select:hover{
   padding-top: 2px;
 }
 
-
-
-
+#cart-img{
+  cursor: pointer;
+}
