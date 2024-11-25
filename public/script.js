@@ -20,7 +20,7 @@ document.getElementById("linija-search-id").addEventListener("click", function()
 })
 
 
-/* Function for showing hr on button click - called in HTML */ 
+// Function for showing hr on button click - called in HTML  
 function hrShow() {
   let m = document.getElementById("bottom_hr");
 
@@ -30,6 +30,7 @@ function hrShow() {
     m.style.display = "block";
   }
 }
+
 
 function showInfo(){
   let n = document.getElementById("choose-div-id");
@@ -77,7 +78,7 @@ async function handleRouteClick(routeId) {
     }
 }
 
-// Eventlistener for all the buttons
+// Eventlistener for all the buttons - routes
 const routeButtons = [1, 3, 5, 7, 9];
 routeButtons.forEach((routeId) => {
   document.getElementById(routeId.toString()).addEventListener("click", function () {
@@ -93,7 +94,7 @@ routeButtons.forEach((routeId) => {
 });
 
 
-// Getting data for departure time
+// Getting data from api for departure time 
 async function departureTime(route_id, day_of_week) {
   try {
     const response = await fetch(
@@ -125,7 +126,7 @@ document.getElementById("directionSelect").addEventListener("change", async func
     
 });
 
-// Event listener za odabir dana (Radni dan, Subota, Nedelja)
+// Event listener for day choosing (Radni dan, Subota, Nedelja)
 document.getElementById("daySelect").addEventListener("change", async function() {
     const selectedDirection = document.getElementById("directionSelect").value;
     let route_id = selectedDirection == 1 ? globalRouteId : globalRouteId + 1;
@@ -143,7 +144,7 @@ document.getElementById("daySelect").addEventListener("change", async function()
 });
 
 
-
+// Function for getting start and end station from api
 async function startEndStation(route_id) {
   try {
       const response = await fetch(
@@ -156,6 +157,8 @@ async function startEndStation(route_id) {
   }
 }
 
+// Main function for handling all departure times, for exact route and day of the week, 
+// dinamically adding div with all information from other functions
 async function handleDepartureTimes(route_id, day_of_week) {
   try {
       const departureTimes = await departureTime(route_id, day_of_week); 
@@ -197,7 +200,7 @@ async function handleDepartureTimes(route_id, day_of_week) {
               </div>
 
               <div class="r-button-class">
-                  <button class="r-buttons-card">BAM 03.00</button>
+                  <button class="r-buttons-card" id="buttons-card-id-${uniqueTimeId}">BAM 03.00</button>
               </div>
               <div class="img-class">
                   <img src="assets/down-arrow.png" alt="arrow-logo" class="arrow-logo" id="arrow-id-${uniqueTimeId}">
@@ -212,7 +215,7 @@ async function handleDepartureTimes(route_id, day_of_week) {
             behavior: 'smooth'
           });
 
-
+          // Event listener for arrows to show detail info about exact deprature time of a route
           const arrowElement = document.getElementById(`arrow-id-${uniqueTimeId}`);
           arrowElement.addEventListener("click", async function () {
             arrowElement.classList.toggle("arrow-logo-up");
@@ -224,17 +227,34 @@ async function handleDepartureTimes(route_id, day_of_week) {
             else
               showDetails.style.display = "block"
             let slide = showDetails.classList.contains("slide-in");
-            showDetails.setAttribute("class", slide ? "slide-out" : "slide-in")
-
-
+            showDetails.setAttribute("class", slide ? "slide-out" : "slide-in");
           });
+
+          // Event listener to take the div where the info about the route is,
+          // then store it inside the localStorage and display in the cart page
+          
+
+        const button = document.getElementById(`buttons-card-id-${uniqueTimeId}`);
+        button.addEventListener('click', (event) => {
+          // Get the parent div of the clicked button
+          const parentDiv = event.target.closest('#card-info-id');
+    
+          if (parentDiv) {
+            const divContent = parentDiv.outerHTML; // Store the outerHTML of the parent div
+            localStorage.setItem('cartDiv', divContent); // Save the content in localStorage
+        
+            // Go to the cart page
+            window.location.href = 'cart.html';
+          }
+        });
+
       }
   } catch (error) {
       console.error("Error fetching and displaying departure times:", error);
   }
 }
 
-
+// Getting data about travel time from api
 async function getTravelInfo(route_id) {
   try {
       const response = await fetch(
@@ -247,7 +267,7 @@ async function getTravelInfo(route_id) {
     }
 }
 
-
+// Calculating total time needed for a bus to go from A to B and displaying in HH:MM format
 async function calculateTotalTravelTime(route_id, departure_time) {
   try {
       const stationData = await getTravelInfo(route_id); 
@@ -285,7 +305,7 @@ async function calculateTotalTravelTime(route_id, departure_time) {
 }
 
 
-// Function for getting travel times
+// Function for getting travel times between every station in a single route
 async function getTravelTime(route_id) {
     try {
         const response = await fetch(
@@ -298,6 +318,8 @@ async function getTravelTime(route_id) {
       }
 }
 
+// Function for showing details about travel time between stations inside a route,
+// dinamically appending that info inside a div 
 async function showTravelTime(route_id, departure_time) {
     try {
         const data = await getTravelTime(route_id);
@@ -359,3 +381,8 @@ async function showTravelTime(route_id, departure_time) {
         console.error("Error fetching departure times:", error);
     }
 } 
+
+document.getElementById("cart-img").addEventListener("click", () => {
+  window.location.href ="cart.html";
+})
+
