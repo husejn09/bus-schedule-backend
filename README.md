@@ -55,8 +55,8 @@ node index.js
 4. Populate with data
 5. Replace the data inside the DB configuration file with your own (e.g., host name, password, etc.) 
 
-### Demo video
+## Demo video
 [![Project Overview](https://img.youtube.com/vi/5tx5BstJKHc/0.jpg)](https://www.youtube.com/watch?v=5tx5BstJKHc)
 
-### License
+## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
