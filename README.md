@@ -58,3 +58,5 @@ node index.js
 ### Demo video
 [![Project Overview](https://img.youtube.com/vi/5tx5BstJKHc/0.jpg)](https://www.youtube.com/watch?v=5tx5BstJKHc)
 
+### License
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
